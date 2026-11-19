@@ -345,7 +345,7 @@ document.addEventListener('click',async e=>{const b=e.target.closest('button,[da
   if(d.gen==='fault'){R.faultText=genFault();dirty();rer();return}
   if(d.unit){const tb=R.tables[+d.unit],c=tb.cells[d.k]=tb.cells[d.k]||{v:'',u:'MΩ'};const U=['kΩ','MΩ','GΩ'];c.u=U[(U.indexOf(c.u)+1)%3];b.textContent=c.u;dirty();return}
   if(d.pcol!==undefined){R.points[+d.pcol].color=d.c;dirty();rer();return}
-  if(d.phr!==undefined){R.conc=(R.conc.trim()?R.conc.trim()+'\n':'')+S.phrases[+d.phr];dirty();rer();toast('נוסף לטקסט');return}
+  if(d.phr!==undefined){const ph=S.phrases[+d.phr];if(R.conc.split('\n').some(l=>l.trim()===ph.trim())){toast('המשפט הזה כבר נמצא בטקסט');return}R.conc=(R.conc.trim()?R.conc.trim()+'\n':'')+S.phrases[+d.phr];dirty();rer();toast('נוסף לטקסט');return}
   if(d.ann){annotate(d.ann,+d.i);return}
   if(d.size){arrOf(d.size)[+d.i].size=d.s;dirty();rer();return}
   if(d.mv){const a=arrOf(d.mv),i=+d.i,j=i+ +d.d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];dirty();rer();return}
